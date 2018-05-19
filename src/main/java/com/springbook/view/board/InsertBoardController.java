@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class InsertBoardController {
 
     @RequestMapping(value = "/insertBoard.do")
-    public void insertBoard(BoardVO vo) {
-        System.out.println("글 등록 처리");
-
-        BoardDAO boardDAO = new BoardDAO();
+    public String insertBoard(BoardVO vo, BoardDAO boardDAO) {
         boardDAO.insertBoard(vo);
+        return "redirect:getBoardList.do";
     }
 }
