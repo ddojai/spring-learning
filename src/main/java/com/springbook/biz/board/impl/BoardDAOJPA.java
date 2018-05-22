@@ -36,6 +36,6 @@ public class BoardDAOJPA {
 
     public List<BoardVO> getBoardList(BoardVO vo) {
         System.out.println("===> JPA로 getBoardList() 기능 처리");
-        return em.createQuery("from BoardVO b order by b.seq desc").getResultList();
+        return em.createQuery("select b from BoardVO b order by b.seq desc").getResultList();
     }
 }
