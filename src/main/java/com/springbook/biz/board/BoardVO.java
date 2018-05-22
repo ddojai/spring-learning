@@ -3,28 +3,29 @@ package com.springbook.biz.board;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
+
+import javax.persistence.*;
 
 
 // VO(Value Object)
-@XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Table(name="BOARD")
 public class BoardVO {
-    @XmlAttribute
+    @Id
+    @GeneratedValue
     private int seq;
     private String title;
     private String writer;
     private String content;
-    private Date regDate;
+    @Temporal(TemporalType.DATE)
+    private Date regDate = new Date();
     private int cnt;
-    @XmlTransient
+    @Transient
     private String searchCondition;
-    @XmlTransient
+    @Transient
     private String searchKeyword;
-    @XmlTransient
+    @Transient
     private MultipartFile uploadFile;
 
     public int getSeq() {

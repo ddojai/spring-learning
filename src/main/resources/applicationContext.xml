@@ -33,8 +33,8 @@
     </bean>
 
     <!-- Transaction 설정 -->
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
     <tx:advice id="txAdvice" transaction-manager="txManager">
@@ -48,23 +48,6 @@
         <aop:pointcut id="txPointcut" expression="execution(* com.springbook.biz..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
-    <!--
-    <bean id="log" class="com.springbook.biz.common.LogAdvice"/>
-    <bean id="before" class="com.springbook.biz.common.BeforeAdvice"/>
-    <bean id="afterReturning" class="com.springbook.biz.common.AfterReturningAdvice"/>
-    <bean id="afterThrowing" class="com.springbook.biz.common.AfterThrowingAdvice"/>
-    <bean id="after" class="com.springbook.biz.common.AfterAdvice"/>
-    <bean id="around" class="com.springbook.biz.common.AroundAdvice"/>
-
-    <aop:config>
-        <aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))"/>
-        <aop:pointcut id="getPointcut" expression="execution(* com.springbook.biz..*Impl.get*(..))"/>
-
-        <aop:aspect ref="log">
-            <aop:before method="printLog" pointcut-ref="allPointcut"/>
-        </aop:aspect>
-    </aop:config>
-    -->
 
     <!-- Spring과 Mybatis 연동 설정 -->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -73,5 +56,12 @@
     </bean>
     <bean class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSession"/>
+    </bean>
+
+    <!-- 스프링과 JPA 연동 설정 -->
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
     </bean>
 </beans>
