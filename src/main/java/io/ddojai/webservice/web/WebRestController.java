@@ -1,10 +1,10 @@
-package io.ddojai.github.springboot.api;
+package io.ddojai.webservice.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class WebRestController {
 
     @GetMapping("/hello")
     public String hello() {
