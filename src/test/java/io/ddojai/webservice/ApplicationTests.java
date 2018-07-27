@@ -1,4 +1,4 @@
-package io.ddojai.github.springboot;
+package io.ddojai.webservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
