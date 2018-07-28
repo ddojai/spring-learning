@@ -1,5 +1,6 @@
-package io.ddojai.webservice.domain.posts;
+package io.ddojai.webservice.dto.posts;
 
+import io.ddojai.webservice.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

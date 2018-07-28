@@ -1,7 +1,6 @@
 package io.ddojai.webservice.web;
 
-import io.ddojai.webservice.domain.posts.PostsRepository;
-import io.ddojai.webservice.domain.posts.PostsSaveRequestDto;
+import io.ddojai.webservice.dto.posts.PostsSaveRequestDto;
 import io.ddojai.webservice.service.PostsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -2,7 +2,7 @@ package io.ddojai.webservice.service;
 
 import io.ddojai.webservice.domain.posts.Posts;
 import io.ddojai.webservice.domain.posts.PostsRepository;
-import io.ddojai.webservice.domain.posts.PostsSaveRequestDto;
+import io.ddojai.webservice.dto.posts.PostsSaveRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
