@@ -86,6 +86,7 @@
                         <input type="text" class="form-control" name="replyer">
                     </div>
                     <div class="modal-footer">
+                        <button id="delModalBtn" class="btn btn-danger">Delete</button>
                         <button id="modalBtn" class="btn btn-info">Save</button>
                         <button type="button" class="btn btn-default" data-dismis="modal">Close</button>
                     </div>
@@ -165,7 +166,35 @@
                     })
                 }
 
-            })
+            });
+
+            var rno;
+            $("#replyTable").on("click", "tr", function (e) {
+                var tds = $(this).find('td');
+
+                console.log(tds);
+
+                rno = tds[0].innerHTML;
+                mode = 'MOD';
+
+                replyTextObj.val(tds[1].innerHTML);
+                replyerObj.val(tds[2].innerHTML);
+                $("#myModal").modal("show");
+                $(".modal-title").text("Modify/Delete Reply");
+            });
+            
+            $("#delModalBtn").on("click", function () {
+                var obj = {bno:bno, rno:rno};
+                
+                replyManager.remove(obj, function (list) {
+                    printList(list);
+                    alert("댓글이 삭제되었습니다.");
+                    $("#myModal").modal("hide");
+                    replyTextObj.val("");
+                    replyerObj.val("");
+                });
+            });
+
         });
     </script>
 </th:block>
