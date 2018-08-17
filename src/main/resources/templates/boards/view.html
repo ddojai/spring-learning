@@ -63,8 +63,39 @@
                 <tbody id="replyTable">
                 </tbody>
             </table>
+
+            <div class="pull-right">
+                <button class="btn" id="addReplyBtn">Add Reply</button>
+            </div>
+
         </div>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismis="modal">&times</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>Reply Text</label>
+                        <input type="text" class="form-control" name="replyText">
+                        <label>Replyer</label>
+                        <input type="text" class="form-control" name="replyer">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modalBtn" class="btn btn-info">Save</button>
+                        <button type="button" class="btn btn-default" data-dismis="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Modal -->
+
     </div>
+    <!-- end fragment -->
 
 </div>
 
@@ -101,6 +132,40 @@
                     + "-" + (date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1))
                     + "-" + date.getDate()
             }
+
+            var mode;
+
+            $("#addReplyBtn").on('click', function () {
+                $("#myModal").modal("show");
+                $(".modal-title").text("Add Reply");
+
+                mode = "ADD";
+            });
+
+            var bno = [[${vo.bno}]];
+
+            var replyTextObj = $("input[name='replyText']");
+            var replyerObj = $("input[name='replyer']");
+
+            $("#modalBtn").click(function () {
+                if (mode == 'ADD') {
+                    var replyText = replyTextObj.val();
+                    var replyer = replyerObj.val();
+
+                    var obj = {replyText:replyText, replyer:replyer, bno:bno};
+
+                    // console.log(obj);
+
+                    replyManager.add(obj, function (list) {
+                        printList(list);
+                        alert("새로운 댓글이 추가되었습니다.");
+                        $("#myModal").modal("hide");
+                        replyTextObj.val("");
+                        replyerObj.val("");
+                    })
+                }
+
+            })
         });
     </script>
 </th:block>
