@@ -8,27 +8,37 @@ var replyManager = (function () {
         console.log("add....");
 
         $.ajax({
-            type:'post',
+            type: 'post',
             url: '/replies/' + obj.bno,
             data: JSON.stringify(obj),
             dataType: 'json',
             contentType: "application/json",
-            success:callback
+            success: callback
         });
     };
 
     var update = function (obj, callback) {
+        console.log('/replies/' + obj.bno + '/' + obj.rno);
         console.log("update.......");
+
+        $.ajax({
+            type: 'put',
+            url: '/replies/' + obj.bno,
+            data: JSON.stringify(obj),
+            dataType: 'json',
+            contentType: "application/json",
+            success: callback
+        });
     };
 
     var remove = function (obj, callback) {
         console.log("remove.......");
         $.ajax({
-            type:'delete',
-            url:'/replies/' + obj.bno + '/' + obj.rno,
-            dataType:'json',
+            type: 'delete',
+            url: '/replies/' + obj.bno + '/' + obj.rno,
+            dataType: 'json',
             contentType: "application/json",
-            success:callback
+            success: callback
         });
     };
 
