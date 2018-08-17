@@ -1,6 +1,7 @@
 package io.ddojai.controller;
 
 import io.ddojai.domain.WebBoard;
+import io.ddojai.persistence.CustomCrudRepository;
 import io.ddojai.persistence.WebBoardRepository;
 import io.ddojai.vo.PageMaker;
 import io.ddojai.vo.PageVO;
@@ -22,13 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class WebBoardController {
 
     @Autowired
-    private WebBoardRepository repo;
+//    private WebBoardRepository repo;
+    private CustomCrudRepository repo;
 
     @GetMapping("/list")
     public void list(@ModelAttribute("pageVO") PageVO vo, Model model) {
         Pageable page = vo.makePageable(0, "bno");
 
-        Page<WebBoard> result = repo.findAll(repo.makePredicate(vo.getType(), vo.getKeyword()), page);
+        Page<Object[]> result = repo.getCustomPage(vo.getType(), vo.getKeyword(), page);
 
         log.info("" + page);
         log.info("" + result);
