@@ -21,6 +21,8 @@ public class ZerockSecurityUser extends User {
 
     public ZerockSecurityUser(Member member) {
         super(member.getUid(), member.getUpw(), makeGrantedAuthority(member.getRoles()));
+
+        this.member = member;
     }
 
     private static List<GrantedAuthority> makeGrantedAuthority(List<MemberRole> roles) {
