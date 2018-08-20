@@ -28,6 +28,9 @@ var replyManager = (function () {
             type: 'put',
             url: '/replies/' + obj.bno,
             data: JSON.stringify(obj),
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(obj.csrf.headerName, obj.csrf.token);
+            },
             dataType: 'json',
             contentType: "application/json",
             success: callback
@@ -40,6 +43,9 @@ var replyManager = (function () {
             type: 'delete',
             url: '/replies/' + obj.bno + '/' + obj.rno,
             dataType: 'json',
+            beforeSend : function(xhr) {
+                xhr.setRequestHeader(obj.csrf.headerName, obj.csrf.token);
+            },
             contentType: "application/json",
             success: callback
         });
