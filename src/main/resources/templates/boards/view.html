@@ -5,6 +5,8 @@
 
 <div layout:fragment="content">
 
+    <form th:action="${'/login'}"></form>
+
     <div class="panel-heading">View Page</div>
 
     <div class="panel-body">
@@ -140,9 +142,25 @@
 
             var mode;
 
+            var uid = [[${#authentication.principal} eq 'anonymousUser' ? null :${#authentication.principal.member.uid}]];
+
+            var csrf = JSON.parse('[[${_csrf}]]');
+
             $("#addReplyBtn").on('click', function () {
+
+                if (uid == null) {
+                    if (confirm("로그인할까요?")) {
+                        self.location = [[@{/login}]];
+                    }
+                    return;
+                }
+
+                replyerObj.val(uid);
+
                 $("#myModal").modal("show");
                 $(".modal-title").text("Add Reply");
+
+                $("#delModalBtn").hide();
 
                 mode = "ADD";
             });
@@ -185,7 +203,7 @@
 
                 if (mode == 'ADD') {
 
-                    var obj = {replyText: replyText, replyer: replyer, bno: bno};
+                    var obj = {replyText: replyText, replyer: replyer, bno: bno, csrf:csrf};
 
                     // console.log(obj);
 
