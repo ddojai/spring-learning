@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/boards/register")
                 .hasAnyRole("BASIC", "MANAGER", "ADMIN");
 
-        http.formLogin().loginPage("/login");
+        http.formLogin().loginPage("/login").successHandler(new LoginSuccesHandler());
 
         http.exceptionHandling().accessDeniedPage("/accessDenied");
         // 세션 무효화
