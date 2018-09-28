@@ -1,3 +1,6 @@
+### 인증정보 제외
+src/main/resources/social.yml
+
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
