@@ -1,6 +1,6 @@
-package repository;
+package io.ddojai.springsocial.repository;
 
-import model.User;
+import io.ddojai.springsocial.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

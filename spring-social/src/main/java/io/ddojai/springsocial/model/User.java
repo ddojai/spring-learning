@@ -1,4 +1,4 @@
-package model;
+package io.ddojai.springsocial.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

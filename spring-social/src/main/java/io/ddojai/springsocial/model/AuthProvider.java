@@ -1,4 +1,4 @@
-package model;
+package io.ddojai.springsocial.model;
 
 public enum  AuthProvider {
     local,
